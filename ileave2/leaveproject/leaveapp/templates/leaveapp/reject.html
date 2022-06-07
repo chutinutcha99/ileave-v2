@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load thaidate %}
+
+{% block content %}
+
+<div class="container-fluid px-4">
+    <h1 class="mt-4">ไม่อนุมัติการลา</h1>
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            DataTable
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>รหัสพนักงาน</th>
+                        <th>ชื่อ-นามสกุล</th>
+                        <th>ประเภทการลา</th>
+                        <th>ตั้งแต่วันที่</th>
+                        <th>ถึงวันที่</th>
+                        <th>จำนวนวันลา</th>
+                        <th>เหตุผลการลา</th>
+                        <th>สถานะการลา</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for showdata in result_reject %}
+                    <tr>
+                        <td>{{showdata.emp_id}}</td>
+                        <td>{{showdata.user.first_name}} - {{showdata.user.last_name}}</td>
+                        <td>{{showdata.leave_type_name}}</td>
+                        <td>{{showdata.start_date|thaidate:"d M Y"}}</td>
+                        <td>{{showdata.end_date|thaidate:"d M Y"}}</td>
+                        <td>{{showdata.days_leave}}</td>
+                        <td>{{showdata.leave_reason}}</td>
+                        <td>{{showdata.status}}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
